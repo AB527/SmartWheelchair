@@ -1,0 +1,15 @@
+app-code/*.iml
+app-code/.gradle
+app-code/local.properties
+app-code/.idea/caches
+app-code/.idea/libraries
+app-code/.idea/modules.xml
+app-code/.idea/workspace.xml
+app-code/.idea/navEditor.xml
+app-code/.idea/assetWizardSettings.xml
+app-code.DS_Store
+app-code/build
+app-code/captures
+app-code/.externalNativeBuild
+app-code/.cxx
+app-code/local.properties
