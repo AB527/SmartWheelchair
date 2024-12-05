@@ -39,9 +39,9 @@ public class Controller extends AppCompatActivity {
     private String requestedCommandToArduino = "1";
     private final UUID deviceUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private static final int REQUEST_CODE_SPEECH_INPUT = 2;
-    private Button moveForward, moveBackward, moveLeft, moveRight, btnStop, btnHorn, btnUseAudio, btnUseGesture, btnDisconnect;
     TextView tempAlert;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +55,7 @@ public class Controller extends AppCompatActivity {
 
         tempAlert = findViewById(R.id.tempAlert);
 
-        moveForward = findViewById(R.id.moveForward);
+        Button moveForward = findViewById(R.id.moveForward);
         moveForward.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
@@ -68,7 +68,7 @@ public class Controller extends AppCompatActivity {
                 return true;
             }
         });
-        moveBackward = findViewById(R.id.moveBackward);
+        Button moveBackward = findViewById(R.id.moveBackward);
         moveBackward.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
@@ -81,7 +81,7 @@ public class Controller extends AppCompatActivity {
                 return true;
             }
         });
-        moveLeft = findViewById(R.id.moveLeft);
+        Button moveLeft = findViewById(R.id.moveLeft);
         moveLeft.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
@@ -94,7 +94,7 @@ public class Controller extends AppCompatActivity {
                 return true;
             }
         });
-        moveRight = findViewById(R.id.moveRight);
+        Button moveRight = findViewById(R.id.moveRight);
         moveRight.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
@@ -107,35 +107,35 @@ public class Controller extends AppCompatActivity {
                 return true;
             }
         });
-        btnStop = findViewById(R.id.btnStop);
+        Button btnStop = findViewById(R.id.btnStop);
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 executeCommand(0);
             }
         });
-        btnHorn = findViewById(R.id.btnExit);
+        Button btnHorn = findViewById(R.id.btnExit);
         btnHorn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 executeCommand(10);
             }
         });
-        btnUseAudio = findViewById(R.id.btnUseAudio);
+        Button btnUseAudio = findViewById(R.id.btnUseAudio);
         btnUseAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 useAudioInput();
             }
         });
-        btnUseGesture = findViewById(R.id.btnUseGesture);
+        Button btnUseGesture = findViewById(R.id.btnUseGesture);
         btnUseGesture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 useGestureInput();
             }
         });
-        btnDisconnect = findViewById(R.id.btnDisconnect);
+        Button btnDisconnect = findViewById(R.id.btnDisconnect);
         btnDisconnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,6 +158,7 @@ public class Controller extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class ConnectBT extends AsyncTask<Void, Void, Void> {
         private boolean connectSuccessful = true;
 
@@ -201,6 +202,7 @@ public class Controller extends AppCompatActivity {
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class DisconnectBT extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -269,9 +271,7 @@ public class Controller extends AppCompatActivity {
                     }
                     Thread.sleep(500);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
         }
@@ -290,12 +290,11 @@ public class Controller extends AppCompatActivity {
 
     private void executeCommand(int cmd) {
         tempAlert.setText(String.valueOf(cmd));
-//            Toast.makeText(getApplicationContext(), String.valueOf(cmd), Toast.LENGTH_SHORT).show();
-        try {
-            BTSocket.getOutputStream().write(String.valueOf(cmd).getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            BTSocket.getOutputStream().write(String.valueOf(cmd).getBytes());
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     private int decodeTextInput(String msg) {
