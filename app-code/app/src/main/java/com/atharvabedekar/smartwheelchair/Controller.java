@@ -40,6 +40,7 @@ public class Controller extends AppCompatActivity {
     private final UUID deviceUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private static final int REQUEST_CODE_SPEECH_INPUT = 2;
     TextView tempAlert;
+    private static final String[] statusValue = {"No Movement", "Moving Forward", "Moving Backward", "Moving Left", "Moving Right"};
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -54,6 +55,7 @@ public class Controller extends AppCompatActivity {
         });
 
         tempAlert = findViewById(R.id.tempAlert);
+        tempAlert.setText("Current Status: " + statusValue[0]);
 
         Button moveForward = findViewById(R.id.moveForward);
         moveForward.setOnTouchListener(new View.OnTouchListener() {
@@ -289,7 +291,7 @@ public class Controller extends AppCompatActivity {
     }
 
     private void executeCommand(int cmd) {
-        tempAlert.setText(String.valueOf(cmd));
+        tempAlert.setText("Current Status: " + statusValue[cmd]);
         try {
             BTSocket.getOutputStream().write(String.valueOf(cmd).getBytes());
         } catch (IOException e  ) {

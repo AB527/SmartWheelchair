@@ -61,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        TextView addDevice = findViewById(R.id.addDevice);
+        addDevice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent bluetoothPicker = new Intent("android.bluetooth.devicepicker.action.LAUNCH");
+                startActivity(bluetoothPicker);
+            }
+        });
+
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
             findBluetooth();
         } else {

@@ -14,7 +14,7 @@ SoftwareSerial Bluetooth(TxPin,RxPin); // Rx=5, Tx=4
 #define IN3 6
 #define IN4 5
 
-int wheelSpeed = 128;
+int wheelSpeed = 250;
 
 void setup() {
   Serial.begin(9600);  
@@ -34,7 +34,6 @@ void loop() {
   if(Bluetooth.available() > 0)  
   {
     BluetoothText = Bluetooth.read();      
-    Serial.print(BluetoothText); 
     handleCommand(BluetoothText); 
     // executeTest();             
   }
@@ -84,18 +83,18 @@ void handleCommand(char commandCode) {
       break;
     case '3':
       // Left
-      digitalWrite(IN1, HIGH);
+      digitalWrite(IN1, LOW);
       digitalWrite(IN2, LOW);
-      digitalWrite(IN3, LOW);
+      digitalWrite(IN3, HIGH);
       digitalWrite(IN4, LOW);
       analogWrite (ENA1, wheelSpeed);
       analogWrite (ENA2, wheelSpeed);
       break;
     case '4':
       // Right
-      digitalWrite(IN1, LOW);
+      digitalWrite(IN1, HIGH);
       digitalWrite(IN2, LOW);
-      digitalWrite(IN3, HIGH);
+      digitalWrite(IN3, LOW);
       digitalWrite(IN4, LOW);
       analogWrite (ENA1, wheelSpeed);
       analogWrite (ENA2, wheelSpeed);

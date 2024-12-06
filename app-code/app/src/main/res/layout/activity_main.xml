@@ -41,22 +41,35 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/addDevice"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleText2" >
+        app:layout_constraintTop_toBottomOf="@+id/titleText2">
 
         <LinearLayout
             android:id="@+id/BTList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:divider="?android:listDivider"
             android:dividerPadding="2.5dp"
+            android:orientation="vertical"
             android:showDividers="middle" />
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/addDevice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="Device not in list ?\n Click here"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:clickable="true" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
