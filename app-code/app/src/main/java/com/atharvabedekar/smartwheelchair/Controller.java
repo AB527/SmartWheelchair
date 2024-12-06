@@ -290,11 +290,11 @@ public class Controller extends AppCompatActivity {
 
     private void executeCommand(int cmd) {
         tempAlert.setText(String.valueOf(cmd));
-//        try {
-//            BTSocket.getOutputStream().write(String.valueOf(cmd).getBytes());
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            BTSocket.getOutputStream().write(String.valueOf(cmd).getBytes());
+        } catch (IOException e  ) {
+            throw new RuntimeException(e);
+        }
     }
 
     private int decodeTextInput(String msg) {

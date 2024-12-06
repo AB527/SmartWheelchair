@@ -2,8 +2,8 @@
 
 char BluetoothText;
 
-#define RxPin 2
-#define TxPin 3
+#define RxPin 10
+#define TxPin 11
 
 SoftwareSerial Bluetooth(TxPin,RxPin);
 
@@ -13,10 +13,8 @@ void setup() {
 }
 
 void loop() {
-  // Serial.print(Bluetooth.available()); 
   if(Bluetooth.available() > 0)  
   {
-    Serial.print(Bluetooth.available());
     BluetoothText = Bluetooth.read();      
     Serial.println(BluetoothText);             
   }

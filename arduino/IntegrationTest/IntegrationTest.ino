@@ -1,17 +1,20 @@
 #include <SoftwareSerial.h>
 char BluetoothText;
 
-SoftwareSerial Bluetooth(5,4); // Rx=5, Tx=4
+#define RxPin 10
+#define TxPin 11
 
-#define ENA1 9
-#define IN1 7
-#define IN2 8
+SoftwareSerial Bluetooth(TxPin,RxPin); // Rx=5, Tx=4
 
-#define ENA2 9
-#define IN3 7
-#define IN4 8
+#define ENA1 2
+#define IN1 3
+#define IN2 4
 
-int wheelSpeed = 180;
+#define ENA2 7
+#define IN3 6
+#define IN4 5
+
+int wheelSpeed = 128;
 
 void setup() {
   Serial.begin(9600);  
@@ -20,6 +23,10 @@ void setup() {
   pinMode(ENA1, OUTPUT);
   pinMode(IN1, OUTPUT); 
   pinMode(IN2, OUTPUT);
+
+  pinMode(ENA2, OUTPUT);
+  pinMode(IN3, OUTPUT); 
+  pinMode(IN4, OUTPUT);
 }
 
 void loop() {
@@ -28,10 +35,11 @@ void loop() {
   {
     BluetoothText = Bluetooth.read();      
     Serial.print(BluetoothText); 
-    handleCommand(BluetoothText);              
+    handleCommand(BluetoothText); 
+    // executeTest();             
   }
 
-//    executeTest();
+
 }
 
 void executeTest() {
@@ -68,9 +76,9 @@ void handleCommand(char commandCode) {
     case '2':
       // Backward
       digitalWrite(IN1, LOW);
-      digitalWrite(IN2, LOW);
+      digitalWrite(IN2, HIGH);
       digitalWrite(IN3, LOW);
-      digitalWrite(IN4, LOW);
+      digitalWrite(IN4, HIGH);
       analogWrite (ENA1, wheelSpeed);
       analogWrite (ENA2, wheelSpeed);
       break;
